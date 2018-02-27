@@ -1,0 +1,19 @@
+--- Makefile.orig	2018-02-16 20:25:23 UTC
++++ Makefile
+@@ -1,4 +1,4 @@
+-CC=gcc
++CC=cc
+ OPT=-O3 -Wall -std=gnu99
+ OPT_PRO=-DTIC80_PRO
+ BIN_NAME= bin/tic80
+@@ -68,9 +68,8 @@ LINUX_LINKER_LTO_FLAGS= \
+ 	-lz
+ 
+ LINUX_LINKER_FLAGS= \
+-	-llua5.3 \
++	-llua-5.3 \
+ 	-lwren \
+-	-ldl \
+ 	-lm \
+ 	-lpthread \
+ 	-lrt \

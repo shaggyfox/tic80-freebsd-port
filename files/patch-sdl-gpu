@@ -1,0 +1,14 @@
+--- 3rd-party/sdl-gpu/build/linux/Makefile	2018-02-26 12:29:19.000000000 +0100
++++ 3rd-party/sdl-gpu/build/linux/Makefile	2018-02-27 11:51:47.345731000 +0100
+@@ -1,9 +1,9 @@
+-CC=gcc
+ OPT=-O3 -DGLEW_STATIC -DSDL_GPU_DISABLE_GLES
+ AR= ar rcu
+ RANLIB= ranlib
+ 
+ INCLUDES = \
++	-I /usr/local/include \
+ 	-I../../include \
+ 	-I../../src/externals/glew \
+ 	-I../../src/externals/glew/GL \
+
