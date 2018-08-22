@@ -1,4 +1,6 @@
---- Makefile.orig	2018-02-16 20:25:23 UTC
+diff --git Makefile Makefile
+index 8376e73..3a4ea97 100644
+--- Makefile
 +++ Makefile
 @@ -1,4 +1,4 @@
 -CC=gcc
@@ -6,14 +8,96 @@
  OPT=-O3 -Wall -std=gnu99
  OPT_PRO=-DTIC80_PRO
  BIN_NAME= bin/tic80
-@@ -68,9 +68,8 @@ LINUX_LINKER_LTO_FLAGS= \
- 	-lz
+@@ -44,7 +44,7 @@ LINUX_INCLUDES= \
+ 	$(GTK_INCLUDES)
  
- LINUX_LINKER_FLAGS= \
--	-llua5.3 \
-+	-llua-5.3 \
- 	-lwren \
--	-ldl \
- 	-lm \
- 	-lpthread \
- 	-lrt \
+ LINUX_LIBS= \
+-	$(GTK_LIBS) \
++	$(GTK_LIBS) -L/usr/local/lib -lusbhid \
+ 	-L$(3RD_PARTY)/wren-0.1.0/lib \
+ 	-L$(3RD_PARTY)/sdl-gpu/build/linux \
+ 	-L$(3RD_PARTY)/lua-5.3.1/src \
+@@ -340,7 +340,7 @@ mingw: $(STUDIO_DLL) $(SDL_NET) $(FILE_DIALOG) bin/system.o bin/res.o
+ 
+ mingw-pro:
+ 	$(eval OPT += $(OPT_PRO))
+-	make mingw OPT="$(OPT)"
++	gmake mingw OPT="$(OPT)"
+ 
+ run: mingw-pro
+ 	$(MINGW_OUTPUT)
+@@ -350,21 +350,21 @@ linux64-lto:
+ 
+ linux64-lto-pro:
+ 	$(eval OPT += $(OPT_PRO))
+-	make linux64-lto OPT="$(OPT)"
++	gmake linux64-lto OPT="$(OPT)"
+ 
+ linux32-lto:
+ 	$(CC) $(GTK_INCLUDES) $(SOURCES) $(SYSTEM) $(TIC80_SRC) $(SOURCES_EXT) $(OPT) $(INCLUDES) $(LINUX32_LIBS) $(LINUX_LINKER_LTO_FLAGS) -flto -o $(BIN_NAME)
+ 
+ linux32-lto-pro:
+ 	$(eval OPT += $(OPT_PRO))
+-	make linux32-lto OPT="$(OPT)"
++	gmake linux32-lto OPT="$(OPT)"
+ 
+ chip-lto:
+ 	$(CC) $(LINUX_INCLUDES) $(GTK_INCLUDES) $(SOURCES) src/system/chip.c $(TIC80_SRC) $(SOURCES_EXT) $(OPT) -D__CHIP__ $(INCLUDES) $(LINUX_ARM_LIBS) $(GTK_LIBS) $(LINUX_LINKER_LTO_FLAGS) -flto -o $(BIN_NAME)
+ 
+ chip-lto-pro:
+ 	$(eval OPT += $(OPT_PRO))
+-	make chip-lto OPT="$(OPT)"
++	gmake chip-lto OPT="$(OPT)"
+ 
+ WREN_A=$(3RD_PARTY)/wren-0.1.0/lib/libwren.a
+ SDLGPU_A=$(3RD_PARTY)/sdl-gpu/build/linux/libsdlgpu.a
+@@ -372,30 +372,30 @@ LUA_A=$(3RD_PARTY)/lua-5.3.1/src/liblua.a
+ SDL2_A=$(3RD_PARTY)/SDL2-2.0.7/build/.libs/libSDL2.a
+ 
+ $(WREN_A):
+-	make static -C $(3RD_PARTY)/wren-0.1.0/
++	gmake static -C $(3RD_PARTY)/wren-0.1.0/
+ 
+ $(SDLGPU_A):
+-	make -C $(3RD_PARTY)/sdl-gpu/build/linux/
++	gmake -C $(3RD_PARTY)/sdl-gpu/build/linux/
+ 
+ $(LUA_A):
+-	make linux -C $(3RD_PARTY)/lua-5.3.1/
++	gmake linux -C $(3RD_PARTY)/lua-5.3.1/
+ 
+ $(SDL2_A):
+-	cd $(3RD_PARTY)/SDL2-2.0.7/ && ./configure --enable-sndio=no && make && cd ../..
++	cd $(3RD_PARTY)/SDL2-2.0.7/ && ./configure --enable-sndio=no && gmake && cd ../..
+ 
+ linux: $(WREN_A) $(SDLGPU_A) $(LUA_A) $(SDL2_A)
+ 	$(CC) $(LINUX_INCLUDES) $(SOURCES) $(SYSTEM) $(LPEG_SRC) $(GIF_SRC) $(SOURCES_EXT) $(TIC80_SRC) $(OPT) $(INCLUDES) $(LINUX_LIBS) $(LINUX_LINKER_FLAGS) -o $(BIN_NAME)
+ 
+ linux-pro:
+ 	$(eval OPT += $(OPT_PRO))
+-	make linux OPT="$(OPT)"
++	gmake linux OPT="$(OPT)"
+ 
+ macosx:
+ 	$(CC) $(SOURCES) $(SYSTEM) $(TIC80_SRC) $(SOURCES_EXT) src/ext/file_dialog.m $(OPT) $(MACOSX_OPT) $(INCLUDES) $(MACOSX_LIBS) -o $(BIN_NAME)
+ 
+ macosx-pro:
+ 	$(eval OPT += $(OPT_PRO))
+-	make macosx OPT="$(OPT)"
++	gmake macosx OPT="$(OPT)"
+ 
+ bin/res.o: build/mingw/res.rc build/mingw/icon.ico
+ 	windres $< $@
+diff --git build.sh build.sh
+index 80d014e..66e1173 100755
+--- build.sh
++++ build.sh
+@@ -15,7 +15,7 @@ do
+       sudo apt-get install build-essential mercurial make cmake autoconf automake libtool libasound2-dev libpulse-dev libaudio-dev libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxi-dev libxinerama-dev libxxf86vm-dev libxss-dev libgl1-mesa-dev libesd0-dev libdbus-1-dev libudev-dev libgles1-mesa-dev libgles2-mesa-dev libegl1-mesa-dev libibus-1.0-dev fcitx-libs-dev libsamplerate0-dev libgtk-3-dev zlib1g-dev libwayland-dev libxkbcommon-dev wayland-protocols libsndio-dev -y
+       ;;
+     "linux")
+-      make linux
++      gmake linux OPT="-DGLEW_STATIC -DSDL_GPU_DISABLE_GLES"
+       ;;
+     "linux32-lto")
+       make linux32-lto

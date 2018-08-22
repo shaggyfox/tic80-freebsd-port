@@ -1,8 +1,57 @@
---- 3rd-party/sdl-gpu/build/linux/Makefile	2018-02-26 12:29:19.000000000 +0100
-+++ 3rd-party/sdl-gpu/build/linux/Makefile	2018-02-27 11:51:47.345731000 +0100
-@@ -1,9 +1,9 @@
+diff --git a/SDL2-2.0.7/Makefile.in b/SDL2-2.0.7/Makefile.in
+index fe56652..a128900 100644
+--- 3rd-party/SDL2-2.0.7/Makefile.in
++++ 3rd-party/SDL2-2.0.7/Makefile.in
+@@ -18,11 +18,11 @@ distfile = $(distdir).tar.gz
+ 
+ @SET_MAKE@
+ SHELL	= @SHELL@
+-CC      = @CC@
++CC      = cc
+ INCLUDE = @INCLUDE@
+ CFLAGS  = @BUILD_CFLAGS@
+ EXTRA_CFLAGS = @EXTRA_CFLAGS@
+-LDFLAGS = @BUILD_LDFLAGS@
++LDFLAGS = @BUILD_LDFLAGS@ -L/usr/local/lib -liconv -lusbhid
+ EXTRA_LDFLAGS = @EXTRA_LDFLAGS@
+ LIBTOOL = @LIBTOOL@
+ INSTALL = @INSTALL@
+diff --git a/SDL2-2.0.7/src/render/opengles/SDL_render_gles.c b/SDL2-2.0.7/src/render/opengles/SDL_render_gles.c
+index f531d37..6268fb7 100644
+--- 3rd-party/SDL2-2.0.7/src/render/opengles/SDL_render_gles.c
++++ 3rd-party/SDL2-2.0.7/src/render/opengles/SDL_render_gles.c
+@@ -20,6 +20,8 @@
+ */
+ #include "../../SDL_internal.h"
+ 
++#include <GLGS/gl.h>
++
+ #if SDL_VIDEO_RENDER_OGL_ES && !SDL_RENDER_DISABLED
+ 
+ #include "SDL_hints.h"
+diff --git a/lua-5.3.1/src/Makefile b/lua-5.3.1/src/Makefile
+index dd97d80..3bf82b2 100644
+--- 3rd-party/lua-5.3.1/src/Makefile
++++ 3rd-party/lua-5.3.1/src/Makefile
+@@ -6,8 +6,8 @@
+ # Your platform. See PLATS for possible values.
+ PLAT= none
+ 
+-CC= gcc -std=gnu99
+-CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_2 $(SYSCFLAGS) $(MYCFLAGS)
++CC= cc -std=gnu99
++CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_2 $(SYSCFLAGS) $(MYCFLAGS) -I/usr/local/include
+ LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
+ LIBS= -lm $(SYSLIBS) $(MYLIBS)
+ 
+diff --git a/sdl-gpu/build/linux/Makefile b/sdl-gpu/build/linux/Makefile
+index 7089fa3..7c9b7f2 100644
+--- 3rd-party/sdl-gpu/build/linux/Makefile
++++ 3rd-party/sdl-gpu/build/linux/Makefile
+@@ -1,9 +1,10 @@
 -CC=gcc
- OPT=-O3 -DGLEW_STATIC -DSDL_GPU_DISABLE_GLES
++CC=cc
+ SDL_GPU_OPT=-O3 -DGLEW_STATIC -DSDL_GPU_DISABLE_GLES
  AR= ar rcu
  RANLIB= ranlib
  
@@ -11,4 +60,3 @@
  	-I../../include \
  	-I../../src/externals/glew \
  	-I../../src/externals/glew/GL \
-

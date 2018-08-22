@@ -2,7 +2,8 @@
 # $FreeBSD$
 
 PORTNAME=	TIC-80
-DISTVERSION=	57624e3
+DIST_SUBDIR=    ${PORTNAME}
+PORTVERSION=	v0.70.1
 CATEGORIES=     games emulators
 MASTER_SITES=	github
 
@@ -14,16 +15,16 @@ LICENSE= 	MIT
 USE_GITHUB= 	yes
 GH_ACCOUNT=	nesbox
 GH_PROJECT=	TIC-80
-GH_TAGNAME=	57624e3
-GH_TUPLE=	nesbox:3rd-party:f8e3165:foo/3rd-party
+GH_TAGNAME=	${PORTVERSION}
+GH_TUPLE=	nesbox:3rd-party:23f0352:foo/3rd-party
 
 uses=gmake python
 
 do-configure:
-	cd work/${PORTNAME}-${DISTVERSION}/3rd-party/wren-0.1.0 && ${GMAKE} static
+	cd ${WRKSRC}/3rd-party/wren-0.1.0 && ${GMAKE} static
 
 do-install:
-	${INSTALL} work/${PORTNAME}-${DISTVERSION}/bin/tic80 ${STAGEDIR}${PREFIX}/bin
+	${INSTALL} ${WRKSRC}/bin/tic80 ${STAGEDIR}${PREFIX}/bin
 
 ALL_TARGET= linux-pro
 MAKE_ARGS= OPT="-O3 -Wall -std=gnu99 -DTIC80_PRO -DGLEW_STATIC -DSDL_GPU_DISABLE_GLES"
