@@ -33,17 +33,19 @@ diff --git a/lua-5.3.1/src/Makefile b/lua-5.3.1/src/Makefile
 index dd97d80..3bf82b2 100644
 --- 3rd-party/lua-5.3.1/src/Makefile
 +++ 3rd-party/lua-5.3.1/src/Makefile
-@@ -6,8 +6,8 @@
+@@ -6,9 +6,9 @@
  # Your platform. See PLATS for possible values.
  PLAT= none
  
 -CC= gcc -std=gnu99
 -CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_2 $(SYSCFLAGS) $(MYCFLAGS)
+-LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
 +CC= cc -std=gnu99
 +CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_2 $(SYSCFLAGS) $(MYCFLAGS) -I/usr/local/include
- LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
++LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS) -L/usr/local/lib
  LIBS= -lm $(SYSLIBS) $(MYLIBS)
  
+ AR= ar rcu
 diff --git a/sdl-gpu/build/linux/Makefile b/sdl-gpu/build/linux/Makefile
 index 7089fa3..7c9b7f2 100644
 --- 3rd-party/sdl-gpu/build/linux/Makefile

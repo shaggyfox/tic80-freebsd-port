@@ -1,5 +1,3 @@
-diff --git Makefile Makefile
-index 8376e73..3a4ea97 100644
 --- Makefile
 +++ Makefile
 @@ -1,4 +1,4 @@
@@ -68,7 +66,7 @@ index 8376e73..3a4ea97 100644
  
  $(SDL2_A):
 -	cd $(3RD_PARTY)/SDL2-2.0.7/ && ./configure --enable-sndio=no && make && cd ../..
-+	cd $(3RD_PARTY)/SDL2-2.0.7/ && ./configure --enable-sndio=no && gmake && cd ../..
++	cd $(3RD_PARTY)/SDL2-2.0.7/ && ./configure --enable-sndio=no && gmake
  
  linux: $(WREN_A) $(SDLGPU_A) $(LUA_A) $(SDL2_A)
  	$(CC) $(LINUX_INCLUDES) $(SOURCES) $(SYSTEM) $(LPEG_SRC) $(GIF_SRC) $(SOURCES_EXT) $(TIC80_SRC) $(OPT) $(INCLUDES) $(LINUX_LIBS) $(LINUX_LINKER_FLAGS) -o $(BIN_NAME)
@@ -88,8 +86,6 @@ index 8376e73..3a4ea97 100644
  
  bin/res.o: build/mingw/res.rc build/mingw/icon.ico
  	windres $< $@
-diff --git build.sh build.sh
-index 80d014e..66e1173 100755
 --- build.sh
 +++ build.sh
 @@ -15,7 +15,7 @@ do
