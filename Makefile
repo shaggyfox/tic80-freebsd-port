@@ -12,13 +12,12 @@ COMMENT=	Fantasy computer for making, playing and sharing tiny games
 
 LICENSE= 	MIT
 
+USES=gmake python
 USE_GITHUB= 	yes
 GH_ACCOUNT=	nesbox
 GH_PROJECT=	TIC-80
 GH_TAGNAME=	${PORTVERSION}
 GH_TUPLE=	nesbox:3rd-party:23f0352:foo/3rd-party
-
-uses=gmake python
 
 do-configure:
 	cd ${WRKSRC}/3rd-party/wren-0.1.0 && ${GMAKE} static
