@@ -1,6 +1,4 @@
-diff --git a/SDL2-2.0.7/Makefile.in b/SDL2-2.0.7/Makefile.in
-index fe56652..a128900 100644
---- 3rd-party/SDL2-2.0.7/Makefile.in
+--- 3rd-party/SDL2-2.0.7/Makefile.in.orig	2018-08-09 20:49:50 UTC
 +++ 3rd-party/SDL2-2.0.7/Makefile.in
 @@ -18,11 +18,11 @@ distfile = $(distdir).tar.gz
  
@@ -16,9 +14,7 @@ index fe56652..a128900 100644
  EXTRA_LDFLAGS = @EXTRA_LDFLAGS@
  LIBTOOL = @LIBTOOL@
  INSTALL = @INSTALL@
-diff --git a/SDL2-2.0.7/src/render/opengles/SDL_render_gles.c b/SDL2-2.0.7/src/render/opengles/SDL_render_gles.c
-index f531d37..6268fb7 100644
---- 3rd-party/SDL2-2.0.7/src/render/opengles/SDL_render_gles.c
+--- 3rd-party/SDL2-2.0.7/src/render/opengles/SDL_render_gles.c.orig	2018-08-09 20:49:50 UTC
 +++ 3rd-party/SDL2-2.0.7/src/render/opengles/SDL_render_gles.c
 @@ -20,6 +20,8 @@
  */
@@ -29,9 +25,7 @@ index f531d37..6268fb7 100644
  #if SDL_VIDEO_RENDER_OGL_ES && !SDL_RENDER_DISABLED
  
  #include "SDL_hints.h"
-diff --git a/lua-5.3.1/src/Makefile b/lua-5.3.1/src/Makefile
-index dd97d80..3bf82b2 100644
---- 3rd-party/lua-5.3.1/src/Makefile
+--- 3rd-party/lua-5.3.1/src/Makefile.orig	2018-08-09 20:49:50 UTC
 +++ 3rd-party/lua-5.3.1/src/Makefile
 @@ -6,9 +6,9 @@
  # Your platform. See PLATS for possible values.
@@ -46,9 +40,7 @@ index dd97d80..3bf82b2 100644
  LIBS= -lm $(SYSLIBS) $(MYLIBS)
  
  AR= ar rcu
-diff --git a/sdl-gpu/build/linux/Makefile b/sdl-gpu/build/linux/Makefile
-index 7089fa3..7c9b7f2 100644
---- 3rd-party/sdl-gpu/build/linux/Makefile
+--- 3rd-party/sdl-gpu/build/linux/Makefile.orig	2018-08-09 20:49:50 UTC
 +++ 3rd-party/sdl-gpu/build/linux/Makefile
 @@ -1,9 +1,10 @@
 -CC=gcc

@@ -1,4 +1,4 @@
---- Makefile
+--- Makefile.orig	2018-08-11 07:00:26 UTC
 +++ Makefile
 @@ -1,4 +1,4 @@
 -CC=gcc
@@ -15,7 +15,7 @@
  	-L$(3RD_PARTY)/wren-0.1.0/lib \
  	-L$(3RD_PARTY)/sdl-gpu/build/linux \
  	-L$(3RD_PARTY)/lua-5.3.1/src \
-@@ -340,7 +340,7 @@ mingw: $(STUDIO_DLL) $(SDL_NET) $(FILE_DIALOG) bin/system.o bin/res.o
+@@ -340,7 +340,7 @@ mingw: $(STUDIO_DLL) $(SDL_NET) $(FILE_D
  
  mingw-pro:
  	$(eval OPT += $(OPT_PRO))
@@ -49,7 +49,7 @@
  
  WREN_A=$(3RD_PARTY)/wren-0.1.0/lib/libwren.a
  SDLGPU_A=$(3RD_PARTY)/sdl-gpu/build/linux/libsdlgpu.a
-@@ -372,30 +372,30 @@ LUA_A=$(3RD_PARTY)/lua-5.3.1/src/liblua.a
+@@ -372,30 +372,30 @@ LUA_A=$(3RD_PARTY)/lua-5.3.1/src/liblua.
  SDL2_A=$(3RD_PARTY)/SDL2-2.0.7/build/.libs/libSDL2.a
  
  $(WREN_A):
@@ -86,7 +86,7 @@
  
  bin/res.o: build/mingw/res.rc build/mingw/icon.ico
  	windres $< $@
---- build.sh
+--- build.sh.orig	2018-08-11 07:00:26 UTC
 +++ build.sh
 @@ -15,7 +15,7 @@ do
        sudo apt-get install build-essential mercurial make cmake autoconf automake libtool libasound2-dev libpulse-dev libaudio-dev libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxi-dev libxinerama-dev libxxf86vm-dev libxss-dev libgl1-mesa-dev libesd0-dev libdbus-1-dev libudev-dev libgles1-mesa-dev libgles2-mesa-dev libegl1-mesa-dev libibus-1.0-dev fcitx-libs-dev libsamplerate0-dev libgtk-3-dev zlib1g-dev libwayland-dev libxkbcommon-dev wayland-protocols libsndio-dev -y

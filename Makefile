@@ -2,10 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	TIC-80
-DIST_SUBDIR=    ${PORTNAME}
 PORTVERSION=	v0.70.1
 CATEGORIES=     games emulators
 MASTER_SITES=	github
+DIST_SUBDIR=    ${PORTNAME}
 
 MAINTAINER=	basti@kummer-post.de
 COMMENT=	Fantasy computer for making, playing and sharing tiny games
